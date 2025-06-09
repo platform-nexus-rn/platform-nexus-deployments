@@ -23,6 +23,11 @@ jobs:
           cd apps/${{ github.event.client_payload.service }}/base
           score-k8s init
 
+      - name: Ensure output directory exists
+        run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+          mkdir -p apps/$SERVICE_NAME/overlays/dev
+
       - name: Generate K8s Manifests
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
