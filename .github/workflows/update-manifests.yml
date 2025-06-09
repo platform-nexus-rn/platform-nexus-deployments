@@ -18,6 +18,11 @@ jobs:
           version: 0.1.5  # or latest
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      - name: Initialize score-k8s
+        run: |
+          cd add apps/${{ github.event.client_payload.service }}/base
+          score-k8s init
+
       - name: Generate K8s Manifests
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
