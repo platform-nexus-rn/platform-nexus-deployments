@@ -1,0 +1,14 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: test-ci-pipeline
+service:
+  ports:
+    http:
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+containers:
+  app:
+    image: ghcr.io/platform-nexus-rn/test-ci-pipeline
+    variables:
+      FLASK_ENV: development
