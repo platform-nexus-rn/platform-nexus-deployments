@@ -20,7 +20,7 @@ jobs:
 
       - name: Initialize score-k8s
         run: |
-          cd add apps/${{ github.event.client_payload.service }}/base
+          cd apps/${{ github.event.client_payload.service }}/base
           score-k8s init
 
       - name: Generate K8s Manifests
