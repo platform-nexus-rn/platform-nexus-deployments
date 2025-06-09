@@ -9,29 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-name: Set up score-k8s CLI
+      - name: Set up score-k8s CLI
         uses: score-spec/setup-score@v2
         with:
           file: score-k8s
-          version: 0.1.5  # or the latest available
+          version: 0.1.5  # or latest
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-name: Generate K8s Manifests
+      - name: Generate K8s Manifests
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
           IMAGE=${{ github.event.client_payload.image }}
 
-          echo ":rocket: Generating manifests for $SERVICE_NAME with image: $IMAGE"
+          echo "🚀 Generating manifests for $SERVICE_NAME with image: $IMAGE"
 
           cd apps/$SERVICE_NAME/base
           score-k8s generate score.yaml --image=$IMAGE --output ../../overlays/dev/deployment.yaml
 
-name: Commit and Push
+      - name: Commit and Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           git add apps/${{ github.event.client_payload.service }}/overlays/dev/deployment.yaml
-          git commit -m ":repeat: Update deployment for ${{ github.event.client_payload.service }}"
+          git commit -m "🔁 Update deployment for ${{ github.event.client_payload.service }}"
           git push
