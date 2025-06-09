@@ -1,54 +1,30 @@
 name: Update Manifests
-
 on:
   repository_dispatch:
     types: [update-manifests]
 
 jobs:
-  update:
+  generate:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout GitOps repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Extract payload info
+      - name: Install score CLI
         run: |
-          echo "Service: ${{ github.event.client_payload.service }}"
-          echo "Image: ${{ github.event.client_payload.image }}"
-          SERVICE_NAME="${{ github.event.client_payload.service }}"
-          IMAGE="${{ github.event.client_payload.image }}"
+          curl -sSL https://score.dev/install.sh | bash
 
-          # Optional: Clone the right app template or update manifests here
-          # Example: create/update deployment.yaml in apps/$SERVICE_NAME/
+      - name: Generate K8s Manifests
+        run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+          IMAGE=${{ github.event.client_payload.image }}
 
-          mkdir -p "apps/$SERVICE_NAME"
-          cat <<EOF > apps/$SERVICE_NAME/deployment.yaml
-          apiVersion: apps/v1
-          kind: Deployment
-          metadata:
-            name: $SERVICE_NAME
-          spec:
-            replicas: 1
-            selector:
-              matchLabels:
-                app: $SERVICE_NAME
-            template:
-              metadata:
-                labels:
-                  app: $SERVICE_NAME
-              spec:
-                containers:
-                  - name: $SERVICE_NAME
-                    image: $IMAGE
-                    ports:
-                      - containerPort: 8080
-          EOF
+          cd apps/$SERVICE_NAME/base
+          score-k8s generate score.yaml --image=$IMAGE --output ../../overlays/dev/deployment.yaml
 
-      - name: Commit and Push
+      - name: Commit & Push
         run: |
           git config user.name "github-actions"
-          git config user.email "github-actions@users.noreply.github.com"
-          git add apps/${{ github.event.client_payload.service }}/deployment.yaml
-          git commit -m "🚀 Add/update deployment for ${{ github.event.client_payload.service }}"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update manifests for $SERVICE_NAME"
           git push
