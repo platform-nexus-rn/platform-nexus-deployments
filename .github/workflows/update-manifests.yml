@@ -56,7 +56,7 @@ jobs:
           echo "After  generation:"
           ls -la ../../overlays/dev
 
-      - name: Fallback: copy from score-k8s output
+      - name: Fallback copy from score-k8s output
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
           BASE=apps/$SERVICE_NAME/base
