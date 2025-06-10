@@ -42,10 +42,19 @@ jobs:
           cd apps/$SERVICE_NAME/base
           score-k8s generate score.yaml --image=$IMAGE --output ../../overlays/dev/deployment.yaml
 
+      - name: Clean up score-k8s state
+        run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+          rm -rf apps/$SERVICE_NAME/base/.score-k8s/
+
       - name: Commit and Push
         run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
-          git add apps/${{ github.event.client_payload.service }}/overlays/dev/deployment.yaml
-          git commit -m "🔁 Update deployment for ${{ github.event.client_payload.service }}"
+
+          git add apps/$SERVICE_NAME/overlays/dev
+
+          git commit -m "🔁 Update deployment for $SERVICE_NAME" || echo "Nothing to commit"
           git push
