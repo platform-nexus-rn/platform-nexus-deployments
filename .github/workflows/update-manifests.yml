@@ -24,7 +24,10 @@ jobs:
       - name: Initialize score-k8s
         run: |
           cd apps/${{ github.event.client_payload.service }}/base
+          pwd
           score-k8s init
+          ls -la
+          echo "score-k8s initialized in $(pwd)"
 
       - name: Ensure output directory exists
         run: |
@@ -43,7 +46,27 @@ jobs:
           echo "🚀 Generating manifests for $SERVICE_NAME with image: $IMAGE"
 
           cd apps/$SERVICE_NAME/base
+          pwd
+          ls -la
+          echo "Using score-k8s to generate manifests for $SERVICE_NAME"
+          echo "Image: $IMAGE"
+          echo "Service Name: $SERVICE_NAME"
+          echo "Current Directory: $(pwd)"
           score-k8s generate score.yaml --image=$IMAGE --output ../../overlays/dev/deployment.yaml
+          echo "After  generation:"
+          ls -la ../../overlays/dev
+
+      - name: Fallback: copy from score-k8s output
+        run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+          BASE=apps/$SERVICE_NAME/base
+          OUTPUT=apps/$SERVICE_NAME/overlays/dev/deployment.yaml
+
+          if [ ! -f "$OUTPUT" ] && [ -f "$BASE/.score-k8s/manifests.yaml" ]; then
+            echo "⚠️ Expected output file missing. Copying from .score-k8s/manifests.yaml"
+            cp "$BASE/.score-k8s/manifests.yaml" "$OUTPUT"
+          fi
+
 
       - name: Debug generated manifest
         run: |
@@ -56,6 +79,12 @@ jobs:
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
           rm -rf apps/$SERVICE_NAME/base/.score-k8s/
+
+      - name: Tree Debug
+        run: |
+          echo "🗂️ Tree of apps/$SERVICE_NAME:"
+          tree apps/$SERVICE_NAME
+
 
       - name: Commit and Push
         run: |
