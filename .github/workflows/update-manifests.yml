@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo with Write Access
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Set up score-k8s CLI
         uses: score-spec/setup-score@v2
@@ -41,6 +44,13 @@ jobs:
 
           cd apps/$SERVICE_NAME/base
           score-k8s generate score.yaml --image=$IMAGE --output ../../overlays/dev/deployment.yaml
+
+      - name: Debug generated manifest
+        run: |
+          SERVICE_NAME=${{ github.event.client_payload.service }}
+          echo "Generated Manifest Content:"
+          cat apps/$SERVICE_NAME/overlays/dev/deployment.yaml
+
 
       - name: Clean up score-k8s state
         run: |
