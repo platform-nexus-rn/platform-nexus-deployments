@@ -26,7 +26,11 @@ jobs:
       - name: Ensure output directory exists
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
-          mkdir -p apps/$SERVICE_NAME/overlays/dev
+          cd apps/$SERVICE_NAME/base
+          mkdir -p ../../overlays/dev
+
+      - run: ls -la ../../overlays/dev
+        working-directory: apps/${{ github.event.client_payload.service }}/base
 
       - name: Generate K8s Manifests
         run: |
