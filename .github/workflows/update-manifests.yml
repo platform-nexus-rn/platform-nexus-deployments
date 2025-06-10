@@ -56,17 +56,10 @@ jobs:
           echo "After  generation:"
           ls -la ../../overlays/dev
 
-      - name: Fallback: copy from score-k8s output
+      - name: Copy manifest to repo location
         run: |
           SERVICE_NAME=${{ github.event.client_payload.service }}
-          BASE=apps/$SERVICE_NAME/base
-          OUTPUT=apps/$SERVICE_NAME/overlays/dev/deployment.yaml
-
-          if [ ! -f "$OUTPUT" ] && [ -f "$BASE/.score-k8s/manifests.yaml" ]; then
-            echo "⚠️ Expected output file missing. Copying from .score-k8s/manifests.yaml"
-            cp "$BASE/.score-k8s/manifests.yaml" "$OUTPUT"
-          fi
-
+          cp apps/$SERVICE_NAME/base/../../overlays/dev/deployment.yaml apps/$SERVICE_NAME/overlays/dev/deployment.yaml
 
       - name: Debug generated manifest
         run: |
