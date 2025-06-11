@@ -48,6 +48,8 @@ spec:
                 app.kubernetes.io/managed-by: score-k8s
                 app.kubernetes.io/name: argocd-test-service-4
         spec:
+            imagePullSecrets:
+              - name: ghcr-login
             containers:
                 - env:
                     - name: FLASK_ENV
