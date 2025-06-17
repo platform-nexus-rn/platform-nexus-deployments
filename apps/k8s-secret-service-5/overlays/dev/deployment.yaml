@@ -17,9 +17,9 @@ spec:
           protocol: TCP
           targetPort: 8080
         - name: metrics
-          port: 9100
+          port: 8080
           protocol: TCP
-          targetPort: 9100
+          targetPort: 8080
     selector:
         app.kubernetes.io/instance: k8s-secret-service-5-bd2e8eb416
 status:
