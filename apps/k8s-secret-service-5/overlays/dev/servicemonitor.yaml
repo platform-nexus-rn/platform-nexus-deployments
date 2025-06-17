@@ -4,7 +4,8 @@ metadata:
   name: k8s-secret-service-5
   namespace: kube-prometheus-stack
   labels:
-    release: prometheus
+    #release: prometheus
+    release: kube-prometheus-stack
 spec:
   selector:
     matchLabels:
