@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: k8s-secret-service-5
-  namespace: monitoring
+  namespace: kube-prometheus-stack
   labels:
     release: prometheus
 spec:
