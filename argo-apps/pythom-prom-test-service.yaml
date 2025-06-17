@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pythom-prom-test-service
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/platform-nexus-rn/platform-nexus-deployments.git
+    targetRevision: main
+    path: apps/pythom-prom-test-service/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pythom-prom-test-service
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
