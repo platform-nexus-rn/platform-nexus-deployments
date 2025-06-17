@@ -12,10 +12,6 @@ metadata:
     name: k8s-secret-service-5-svc
 spec:
     ports:
-        - name: http
-          port: 8080
-          protocol: TCP
-          targetPort: 8080
         - name: metrics
           port: 8080
           protocol: TCP
