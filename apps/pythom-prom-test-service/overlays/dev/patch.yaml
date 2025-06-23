@@ -1,9 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pythom-prom-test-service
-spec:
-  template:
-    spec:
-      imagePullSecrets:
-        - name: ghcr-login
