@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flipkart-python-service
+  namespace: kube-prometheus-stack
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flipkart-python-service
+  namespaceSelector:
+    matchNames:
+      - flipkart-python-service
+  endpoints:
+    - port: metrics
+      interval: 5s
