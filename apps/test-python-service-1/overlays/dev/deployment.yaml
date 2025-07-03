@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+    annotations:
+        k8s.score.dev/workload-name: test-python-service-1
+    creationTimestamp: null
+    labels:
+        app.kubernetes.io/instance: test-python-service-1-6b0c110d3b
+        app.kubernetes.io/managed-by: score-k8s
+        app.kubernetes.io/name: test-python-service-1
+    name: test-python-service-1-svc
+spec:
+    ports:
+        - name: metrics
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+    selector:
+        app.kubernetes.io/instance: test-python-service-1-6b0c110d3b
+status:
+    loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations:
+        k8s.score.dev/workload-name: test-python-service-1
+    creationTimestamp: null
+    labels:
+        app.kubernetes.io/instance: test-python-service-1-6b0c110d3b
+        app.kubernetes.io/managed-by: score-k8s
+        app.kubernetes.io/name: test-python-service-1
+    name: test-python-service-1
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app.kubernetes.io/instance: test-python-service-1-6b0c110d3b
+    strategy: {}
+    template:
+        metadata:
+            annotations:
+                k8s.score.dev/workload-name: test-python-service-1
+            creationTimestamp: null
+            labels:
+                app.kubernetes.io/instance: test-python-service-1-6b0c110d3b
+                app.kubernetes.io/managed-by: score-k8s
+                app.kubernetes.io/name: test-python-service-1
+        spec:
+            containers:
+                - env:
+                    - name: FLASK_ENV
+                      value: development
+                  image: ghcr.io/platform-nexus-rn/test-python-service-1
+                  name: app
+                  resources: {}
+status: {}
