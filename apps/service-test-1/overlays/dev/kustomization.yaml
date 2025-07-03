@@ -1,0 +1,7 @@
+resources:
+  - ../../base
+  - deployment.yaml
+  - servicemonitor.yaml
+
+patchesStrategicMerge:
+  - patch.yaml
