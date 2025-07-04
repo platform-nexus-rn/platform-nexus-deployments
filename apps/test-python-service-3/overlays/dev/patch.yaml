@@ -1,9 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: test-python-service-3
-spec:
-  template:
-    spec:
-      imagePullSecrets:
-        - name: ghcr-login
