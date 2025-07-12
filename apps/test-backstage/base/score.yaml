@@ -1,0 +1,14 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: test-backstage
+service:
+  ports:
+    metrics:
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+containers:
+  app:
+    image: ghcr.io/platform-nexus-rn/test-backstage
+    variables:
+      FLASK_ENV: development
