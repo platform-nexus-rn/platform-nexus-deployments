@@ -6,7 +6,7 @@ metadata:
         k8s.score.dev/workload-name: ruturaj-test-1
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: ruturaj-test-1-a260271481
+        app.kubernetes.io/instance: ruturaj-test-1-68bcda8554
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: ruturaj-test-1
     name: ruturaj-test-1-svc
@@ -17,7 +17,7 @@ spec:
           protocol: TCP
           targetPort: 8080
     selector:
-        app.kubernetes.io/instance: ruturaj-test-1-a260271481
+        app.kubernetes.io/instance: ruturaj-test-1-68bcda8554
 status:
     loadBalancer: {}
 ---
@@ -28,7 +28,7 @@ metadata:
         k8s.score.dev/workload-name: ruturaj-test-1
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: ruturaj-test-1-a260271481
+        app.kubernetes.io/instance: ruturaj-test-1-68bcda8554
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: ruturaj-test-1
     name: ruturaj-test-1
@@ -36,7 +36,7 @@ spec:
     replicas: 1
     selector:
         matchLabels:
-            app.kubernetes.io/instance: ruturaj-test-1-a260271481
+            app.kubernetes.io/instance: ruturaj-test-1-68bcda8554
     strategy: {}
     template:
         metadata:
@@ -44,7 +44,7 @@ spec:
                 k8s.score.dev/workload-name: ruturaj-test-1
             creationTimestamp: null
             labels:
-                app.kubernetes.io/instance: ruturaj-test-1-a260271481
+                app.kubernetes.io/instance: ruturaj-test-1-68bcda8554
                 app.kubernetes.io/managed-by: score-k8s
                 app.kubernetes.io/name: ruturaj-test-1
         spec:
