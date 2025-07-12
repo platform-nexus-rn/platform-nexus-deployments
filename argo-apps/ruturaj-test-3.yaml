@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ruturaj-test-3
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/platform-nexus-rn/platform-nexus-deployments.git
+    targetRevision: main
+    path: apps/ruturaj-test-3/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ruturaj-test-3
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
