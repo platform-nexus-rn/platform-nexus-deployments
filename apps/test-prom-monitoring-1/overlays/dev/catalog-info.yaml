@@ -7,9 +7,12 @@ metadata:
     - python
     - prometheus
     - score
+metadata:
+  name: test-prom-monitoring-1
   annotations:
     backstage.io/kubernetes-id: test-prom-monitoring-1
     backstage.io/kubernetes-namespace: test-prom-monitoring-1
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=test-prom-monitoring-1'
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
