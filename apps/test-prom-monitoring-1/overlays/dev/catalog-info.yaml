@@ -1,12 +1,12 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
-metadata:
-  name: test-prom-monitoring-1
-  description: A test service to monitor using Prometheus and Backstage
-  tags:
-    - python
-    - prometheus
-    - score
+# metadata:
+#   name: test-prom-monitoring-1
+#   description: A test service to monitor using Prometheus and Backstage
+#   tags:
+#     - python
+#     - prometheus
+#     - score
 metadata:
   name: test-prom-monitoring-1
   annotations:
