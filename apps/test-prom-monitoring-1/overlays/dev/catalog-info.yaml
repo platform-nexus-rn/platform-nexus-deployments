@@ -9,7 +9,7 @@ metadata:
     - score
   annotations:
     backstage.io/kubernetes-id: test-prom-monitoring-1
-    backstage.io/kubernetes-namespace: default
+    backstage.io/kubernetes-namespace: test-prom-monitoring-1
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
