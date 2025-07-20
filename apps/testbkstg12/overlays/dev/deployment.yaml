@@ -6,7 +6,7 @@ metadata:
         k8s.score.dev/workload-name: testbkstg12
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: testbkstg12-77467988a9
+        app.kubernetes.io/instance: testbkstg12-d2e2a28ddb
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: testbkstg12
     name: testbkstg12-svc
@@ -17,7 +17,7 @@ spec:
           protocol: TCP
           targetPort: 8080
     selector:
-        app.kubernetes.io/instance: testbkstg12-77467988a9
+        app.kubernetes.io/instance: testbkstg12-d2e2a28ddb
 status:
     loadBalancer: {}
 ---
@@ -28,7 +28,7 @@ metadata:
         k8s.score.dev/workload-name: testbkstg12
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: testbkstg12-77467988a9
+        app.kubernetes.io/instance: testbkstg12-d2e2a28ddb
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: testbkstg12
     name: testbkstg12
@@ -36,7 +36,7 @@ spec:
     replicas: 1
     selector:
         matchLabels:
-            app.kubernetes.io/instance: testbkstg12-77467988a9
+            app.kubernetes.io/instance: testbkstg12-d2e2a28ddb
     strategy: {}
     template:
         metadata:
@@ -44,7 +44,7 @@ spec:
                 k8s.score.dev/workload-name: testbkstg12
             creationTimestamp: null
             labels:
-                app.kubernetes.io/instance: testbkstg12-77467988a9
+                app.kubernetes.io/instance: testbkstg12-d2e2a28ddb
                 app.kubernetes.io/managed-by: score-k8s
                 app.kubernetes.io/name: testbkstg12
         spec:
