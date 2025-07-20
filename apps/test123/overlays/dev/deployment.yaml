@@ -6,7 +6,7 @@ metadata:
         k8s.score.dev/workload-name: test123
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: test123-b649c23e2d
+        app.kubernetes.io/instance: test123-2cb4aa2b10
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: test123
     name: test123-svc
@@ -17,7 +17,7 @@ spec:
           protocol: TCP
           targetPort: 8080
     selector:
-        app.kubernetes.io/instance: test123-b649c23e2d
+        app.kubernetes.io/instance: test123-2cb4aa2b10
 status:
     loadBalancer: {}
 ---
@@ -28,7 +28,7 @@ metadata:
         k8s.score.dev/workload-name: test123
     creationTimestamp: null
     labels:
-        app.kubernetes.io/instance: test123-b649c23e2d
+        app.kubernetes.io/instance: test123-2cb4aa2b10
         app.kubernetes.io/managed-by: score-k8s
         app.kubernetes.io/name: test123
     name: test123
@@ -36,7 +36,7 @@ spec:
     replicas: 1
     selector:
         matchLabels:
-            app.kubernetes.io/instance: test123-b649c23e2d
+            app.kubernetes.io/instance: test123-2cb4aa2b10
     strategy: {}
     template:
         metadata:
@@ -44,7 +44,7 @@ spec:
                 k8s.score.dev/workload-name: test123
             creationTimestamp: null
             labels:
-                app.kubernetes.io/instance: test123-b649c23e2d
+                app.kubernetes.io/instance: test123-2cb4aa2b10
                 app.kubernetes.io/managed-by: score-k8s
                 app.kubernetes.io/name: test123
         spec:
