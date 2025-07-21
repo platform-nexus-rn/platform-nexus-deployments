@@ -1,0 +1,14 @@
+apiVersion: score.dev/v1b1
+metadata:
+  name: my-test-python-service-2
+service:
+  ports:
+    metrics:
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+containers:
+  app:
+    image: ghcr.io/platform-nexus-rn/my-test-python-service-2
+    variables:
+      FLASK_ENV: development

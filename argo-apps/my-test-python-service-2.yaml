@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-test-python-service-2
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/platform-nexus-rn/platform-nexus-deployments.git
+    targetRevision: main
+    path: apps/my-test-python-service-2/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-test-python-service-2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
