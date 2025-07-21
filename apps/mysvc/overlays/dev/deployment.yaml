@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+    annotations:
+        k8s.score.dev/workload-name: mysvc
+    creationTimestamp: null
+    labels:
+        app.kubernetes.io/instance: mysvc-3fcfd51c89
+        app.kubernetes.io/managed-by: score-k8s
+        app.kubernetes.io/name: mysvc
+    name: mysvc-svc
+spec:
+    ports:
+        - name: metrics
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+    selector:
+        app.kubernetes.io/instance: mysvc-3fcfd51c89
+status:
+    loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    annotations:
+        k8s.score.dev/workload-name: mysvc
+    creationTimestamp: null
+    labels:
+        app.kubernetes.io/instance: mysvc-3fcfd51c89
+        app.kubernetes.io/managed-by: score-k8s
+        app.kubernetes.io/name: mysvc
+    name: mysvc
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app.kubernetes.io/instance: mysvc-3fcfd51c89
+    strategy: {}
+    template:
+        metadata:
+            annotations:
+                k8s.score.dev/workload-name: mysvc
+            creationTimestamp: null
+            labels:
+                app.kubernetes.io/instance: mysvc-3fcfd51c89
+                app.kubernetes.io/managed-by: score-k8s
+                app.kubernetes.io/name: mysvc
+        spec:
+            containers:
+                - env:
+                    - name: FLASK_ENV
+                      value: development
+                  image: ghcr.io/platform-nexus-rn/mysvc
+                  name: app
+                  resources: {}
+status: {}
