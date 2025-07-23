@@ -1,9 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: k8s-secret-service-3
-spec:
-  template:
-    spec:
-      imagePullSecrets:
-        - name: ghcr-login
