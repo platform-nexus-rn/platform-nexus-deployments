@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: new-repo-create
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/platform-nexus-rn/platform-nexus-deployments.git
+    targetRevision: main
+    path: apps/new-repo-create/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: new-repo-create
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
