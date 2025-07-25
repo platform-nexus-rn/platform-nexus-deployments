@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: create-repo-4
-  namespace: kube-prometheus-stack
+  namespace: monitoring
   labels:
     release: kube-prometheus-stack
 spec:
